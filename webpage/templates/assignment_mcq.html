@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Assignment Name</h1>
+            <div class="user-info">
+                <span id="username">Welcome back, {{ username }}!</span>
+                <span id="experience">Total Experience: exp</span>
+            </div>
+            <!-- Dashboard button wrapped in an anchor tag -->
+            <!-- <a href="{{ url_for('dashboard') }}"\><button id="dashboard-btn">Dashboard</button></a> -->
+            <!-- <a href="../../map/index.html"><button id="Map-btn">Map</button></a> -->
+    </header>
+
+    <div class="content">
+        <div class="assignment-description">
+            <h2>Description</h2>
+            <p>This is the description of the assignment. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.</p>
+        </div>
+
+        <div class="mcqs">
+            <h2>Multiple Choice Questions</h2>
+            <ol>
+                <li>
+                    <span class="question">Question 1</span>
+                    <ul onclick="loadAssignment(1)">
+                      
+                    </ul>
+                </li>
+            </ol>
+        </div>
+<!-- 
+        <div class="match-the-following">
+            <h2>Match the Following</h2>
+            <div class="question">
+                <span class="statement">Statement 1</span>
+                <select>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                    <option value="option4">Option 4</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="fill-in-the-blanks">
+            <h2>Fill in the Blanks</h2>
+            <div class="question">
+                <p>Complete the sentence: The capital of France is ________.</p>
+                <input type="text" name="blank1">
+            </div>
+            
+        </div>
+
+        <div class="drag-and-drop">
+            <h2>Drag and Drop</h2>
+            <div class="drag-items">
+                <div class="drag-item" draggable="true">Item 1</div>
+                <div class="drag-item" draggable="true">Item 2</div>
+                <div class="drag-item" draggable="true">Item 3</div>
+            </div>
+            <div class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        </div> -->
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
