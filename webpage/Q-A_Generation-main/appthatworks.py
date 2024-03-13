@@ -8,8 +8,8 @@ import warnings
 import requests
 
 warnings.filterwarnings('ignore')
-# openai.api_key = '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'
-api = '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'
+
+api = 'API-KEY'
 
 headers = {
     "Content-Type": "application/json",

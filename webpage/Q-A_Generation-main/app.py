@@ -4,7 +4,7 @@ import json
 import openai
 import warnings
 warnings.filterwarnings('ignore')
-openai.api_key = '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' #'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'
+openai.api_key = 'API_KEY' 
 def question_and_answers(input_text,no_correct):
     if isinstance(input_text, str):
         template_1 ='''
