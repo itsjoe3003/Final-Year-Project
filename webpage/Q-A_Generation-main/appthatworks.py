@@ -9,7 +9,8 @@ import requests
 
 warnings.filterwarnings('ignore')
 
-api = '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'
+api = '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'
+# api = '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'
 
 headers = {
     "Content-Type": "application/json",
@@ -21,7 +22,7 @@ url = "https://api.openai.com/v1/chat/completions"
 # Client = openai.OpenAI()
 
 class question_and_answers():
-    input_text = ""
+    # input_text = ''
     no_correct = 1
 
     template_1 ='''
@@ -145,22 +146,24 @@ class question_and_answers():
     - Please compulsorily generate only specified number of options as answers, dont generate 4 options everytime as default'''
 
     payload = None
-    input1 = None
-    input2 = None
-    input3 = None
+    input1 = ''
+    input2 = ''
+    input3 = ''
 
-    def __init__(self, input_text) -> None:
-        self.input_text = input_text
-        # self.no_correct = no_correct
+    def __init__(self, text) -> None:
+        input_text = text
+    # self.no_correct = no_correct
 
-        input1 = input_text.split('\n')
-        input1 = [para for para in input1 if para.strip()]
-        merged_paras = " ".join(input1)
+        self.input1 = input_text.split('\n')
+        self.input1 = [para for para in self.input1 if para.strip()]
+        merged_paras = " ".join(self.input1)
         self.input2 = 'Paragraph' + merged_paras
         # if no_correct == 1:
         self.input3 = self.template_1 + self.query + self.input2
-        # else :
-        # self.input3 = self.template_2 + self.query + self.input2
+
+        # print(input_text)
+    # else :
+    # self.input3 = self.template_2 + self.query + self.input2
             
 
     def getResponse(self):
@@ -244,6 +247,8 @@ if __name__ == "__main__":
     obj = question_and_answers(input_text)
 
     result = obj.getResponse().split('\n')
+
+    # print(type(input_text))
 
     for i in result:
         st.write(i)
