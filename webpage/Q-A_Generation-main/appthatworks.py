@@ -9,11 +9,11 @@ import requests
 
 warnings.filterwarnings('ignore')
 
-api = ''
+something = ''
 
 headers = {
     "Content-Type": "application/json",
-    "Authorization": "Bearer " + api,
+    "Authorization": "Bearer " + something,
 }
 url = "https://api.openai.com/v1/chat/completions"
 
