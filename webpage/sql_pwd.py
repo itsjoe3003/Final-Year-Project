@@ -1,1 +1,1 @@
-PASS = '6pass_temp9'
+PASS = ''
