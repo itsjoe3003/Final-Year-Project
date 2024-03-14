@@ -1,1 +1,1 @@
-PASS = "Enter SQL password"
+PASS = 'password'

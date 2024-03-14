@@ -1,12 +1,23 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 import pymysql
 import re
-# import jsonify
 from operator import itemgetter
 from sql_pwd import PASS
+import cv2
+import sys
+import threading
+
+sys.path.insert(0, '/FYP')
+
+
+# from controller_test import Controller
+# from test2 import RandomForestClassifier
+from test2 import MainClass
+
+
 
 app = Flask(__name__)
-app.secret_key = "your_secret_key"
+app.secret_key = "Secret Key"
 
 # MySQL database configuration
 mysql_config = {
@@ -15,6 +26,7 @@ mysql_config = {
     'host': 'localhost',
     'database': 'fyp'
 }
+
 
 
 mysql = pymysql.connect(**mysql_config)
@@ -613,11 +625,29 @@ def dashboard_data():
 
 
 
+@app.route('/map')
+def map_page():
+    if 'loggedin' in session:
+        return render_template('map.html')
+    else:
+        return redirect(url_for('login'))
 
     
 
+
+def run_foo():
+    obj = MainClass()
+    while True:
+        obj.foo()
+
+
+foo_thread = threading.Thread(target=run_foo)
+foo_thread.start()
 
 
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+    

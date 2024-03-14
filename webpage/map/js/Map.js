@@ -37,7 +37,7 @@ function Map()
 		if (!ld){
 			ld = document.createElement('img');
 			ld.setAttribute('alt', '');
-			ld.setAttribute('src', 'sf/' + i + j + '.png');
+			ld.setAttribute('src', '../map/sf/' + i + j + '.png');
 			mpLandCache[idx] = ld;
 		}
 		return ld;
@@ -68,7 +68,7 @@ function Map()
 			mp.setAttribute('alt', '');
 			mpTertCache[idx] = mp;
 		}
-		mp.setAttribute('src', 't/' + i + j + '/' + getMapTertYear(data.year, i, j) + '.png');
+		mp.setAttribute('src', '../map/t/' + i + j + '/' + getMapTertYear(data.year, i, j) + '.png');
 		return mp;
 	}
 
@@ -93,7 +93,6 @@ function Map()
 
 	function update_center()
 	{
-		// zoomが変化している場合、座標中心も変化する
 		if (prev_zoom !== data.zoom) {
 			data.map_x = Math.round(data.map_x * scale_for(data.zoom) / scale_for(prev_zoom));
 			data.map_y = Math.round(data.map_y * scale_for(data.zoom) / scale_for(prev_zoom));
@@ -105,7 +104,6 @@ function Map()
 	{
 		update_center();
 
-		// マップの表示範囲を計算
 		let curX = data.map_x;
 		let curY = data.map_y;
 		let mapSize = MAP_SIZE * scale_for(data.zoom);
@@ -137,14 +135,12 @@ function Map()
 		}
 		let ey = py + maxH;
 
-		// マップを表示
 		for (let i = 0; i < MAP_X; i++) {
 			let vi = (i >= px && i <= ex);
 			if (rev) {
 				vi = !vi;
 			}
 			if (maxW >= MAP_X) {
-				// all is visible when screen width >= map width
 				vi = true;
 			}
 			for (let j = 0; j < MAP_Y; j++) {
@@ -207,16 +203,13 @@ function Map()
 
 	function wrap_within_range(u, min, width)
 	{
-		// return v s.t. "u = v (mod width)" and "min <= v < min + width"
 		return min + positive_mod(u - min, width);
 	}
 	function positive_mod(n, divisor)
 	{
-		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Remainder
 		return ((n % divisor) + divisor) % divisor;
 	}
 
-	// 全Regionから、指定した年に含まれるものだけを抽出
 	function update_region_of_year(yr)
 	{
 		let ret = [];
@@ -247,13 +240,12 @@ function Map()
 		return ret;
 	}
 
-	// infoLayerに追加
 	function insert_visible_regions(nt)
 	{
 		visible_regions.push(nt);
 		infoLayer.appendChild(nt.node);
 	}
-	// infoLayerから削除
+
 	function remove_visible_region(rg)
 	{
 		infoLayer.removeChild(rg.node);
@@ -289,14 +281,13 @@ function Map()
 			if (px > -curWidth2 - REGION_WIDTH && px < curWidth2 + 20 &&
 				py > -curHeight2 - 210 && py < curHeight2 + 15 && data.zoom >= nt.disp_level)
 			{
-				// 見えている
+		
 				nt.update(px + curWidth2, py + curHeight2);
 
 				if (!nt.node.parentNode) {
 					insert_visible_regions(nt);
 				}
 			} else {
-				// 見えなくなった
 				if (nt.node.parentNode) {
 					remove_visible_region(nt);
 				}
@@ -304,21 +295,17 @@ function Map()
 		}
 	}
 
-	// スクロール位置を合わせる
 	function limit_map_center()
 	{
 		let mapSize = MAP_SIZE * scale_for(data.zoom);
 		let maxX = MAP_X * mapSize;
 		let maxY = MAP_Y * mapSize;
 
-		// 左右限度を超えた場合、1周回る
 		if (data.map_x < 0) {
 			data.map_x += maxX;
 		} else if (data.map_x >= maxX) {
 			data.map_x -= maxX;
 		}
-
-		// 上下限を超えないようにする
 		const head_bottom = get_element_y('head', 'bottom');
 		const foot_top = get_element_y('year-bar', 'top');
 		const map_y_min = curHeight2 - (head_bottom - 1);
@@ -328,7 +315,7 @@ function Map()
 		} else {
 			data.map_y = (map_y_min + map_y_max) * 0.5;
 		}
-		data.map_y = Math.round(data.map_y);  // for safety
+		data.map_y = Math.round(data.map_y);  
 	}
 
 	function get_element_y(id, key)
@@ -351,8 +338,7 @@ function Map()
 		}
 	}
 
-	// https://github.com/kaorahi/lizgoban/releases/tag/v0.6.0-pre2
-	// から流用
+
 	let last_toast_message = null;
 	let last_toast_animation = null;
 	function toast(message)
@@ -369,7 +355,6 @@ function Map()
 	let url_timer = null;
 	function update_url()
 	{
-		// skip too frequent updates
 		clearTimeout(url_timer);
 		url_timer = setTimeout(update_url_now, 100);
 	}
@@ -459,7 +444,6 @@ function Map()
 	infoLayer.addEventListener('mousemove', function(e)
 	{
 		if (e.buttons != 0 && !is_dragging_year && mousedown_x !== null && (mousedown_x !== e.clientX || mousedown_y !== e.clientY)) {
-			// マウスドラッグによるスクロール
 			scroll(mousedown_x - e.clientX, mousedown_y - e.clientY);
 			mousedown_x = e.clientX;
 			mousedown_y = e.clientY;
@@ -470,7 +454,7 @@ function Map()
 	let prevPoint = null;
 	function touchedPoint(e)
 	{
-		const t = e.changedTouches[0];  // ignore multi-touch
+		const t = e.changedTouches[0];h
 		return {x: t.clientX, y: t.clientY};
 	}
 	function onTouchStart(e)
@@ -480,8 +464,6 @@ function Map()
 			return;
 		}
 		prevPoint = touchedPoint(e);
-		// (workaround for Firefox)
-		// In Firefox, mousemove is fired before mousedown by a tap???
 		mousedown_x = prevPoint.x;
 		mousedown_y = prevPoint.y;
 	}

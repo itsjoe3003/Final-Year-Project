@@ -9,7 +9,7 @@ import requests
 
 warnings.filterwarnings('ignore')
 
-api = 'API-KEY'
+api = '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'
 
 headers = {
     "Content-Type": "application/json",

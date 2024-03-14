@@ -1,73 +1,57 @@
+import cv2
+import mediapipe as mp
+from controller_test import Controller
+import numpy as np
 
-from tkinter import Tk, Label, Button
-import cv2 
-from PIL import Image, ImageTk 
 from test import RandomForestClassifier
 
+gest_obj = RandomForestClassifier()
+
+cap = cv2.VideoCapture(0)
+
+mpHands = mp.solutions.hands
+hands = mpHands.Hands(
+            static_image_mode='store_true',
+            max_num_hands=2,
+            min_detection_confidence=0.7,
+            min_tracking_confidence=0.5,
+)
+mpDraw = mp.solutions.drawing_utils
 
 
-obj = RandomForestClassifier()
+while True:
 
+  success, img = cap.read()
+  img = cv2.flip(img, 1)
 
-# Define a video capture object 
-vid = cv2.VideoCapture(0) 
+  imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+  results = hands.process(imgRGB)
 
-# Declare the width and height in variables 
-width, height = 1980, 1080
+  if results.multi_hand_landmarks:
+      Controller.hand_Landmarks = results.multi_hand_landmarks[0]
+      mpDraw.draw_landmarks(img, Controller.hand_Landmarks, mpHands.HAND_CONNECTIONS)
 
-# Set the width and height 
-vid.set(cv2.CAP_PROP_FRAME_WIDTH, width) 
-vid.set(cv2.CAP_PROP_FRAME_HEIGHT, height) 
+    #   print(results)
+      
+      for hand_landmarks, handedness in zip(results.multi_hand_landmarks, results.multi_handedness):
+          
+          landmark_list = gest_obj.calc_landmark_list(imgRGB, hand_landmarks)
+          pre_processed_landmark_list = gest_obj.pre_process_landmark(landmark_list)
+          pre_processed_landmark_list = np.array(pre_processed_landmark_list).reshape(1,-1)
 
-# Create a GUI app 
-app = Tk() 
+          hand_sign_id = gest_obj.predict(pre_processed_landmark_list)[0]
 
-# Bind the app with Escape keyboard to 
-# quit app whenever pressed 
-app.bind('<Escape>', lambda e: app.quit()) 
+          # print(gest_obj.keypoint_labels[hand_sign_id])
+      
+          Controller.update_fingers_status()
+          Controller.cursor_moving(gest_obj.keypoint_labels[hand_sign_id])
+          Controller.detect_scrolling(gest_obj.keypoint_labels[hand_sign_id])
+          # Controller.detect_zoomming(gest_obj.keypoint_labels[hand_sign_id])
+          Controller.detect_clicking(gest_obj.keypoint_labels[hand_sign_id])
+          Controller.detect_dragging(gest_obj.keypoint_labels[hand_sign_id])
+      
+  img = cv2.resize(img, (1280, 720))
+  cv2.imshow('Hand Tracker', img)
 
-# Create a label and display it on app 
-label_widget = Label(app) 
-label_widget.pack() 
-
-# Create a function to open camera and 
-# display it in the label_widget on app 
-
-def open_camera():
-
-  ret, image = vid.read()
-
-  new_frame = obj.main(image)
-
-    # Convert image from one color space to other 
-  opencv_image = cv2.cvtColor(new_frame, cv2.COLOR_BGR2RGBA) 
-
-  # Capture the latest frame and transform to image 
-  captured_image = Image.fromarray(opencv_image) 
-
-  # Convert captured image to photoimage 
-  photo_image = ImageTk.PhotoImage(image=captured_image) 
-
-  # Displaying photoimage in the label 
-  label_widget.photo_image = photo_image 
-
-  # Configure image in the label 
-  label_widget.configure(image=photo_image) 
-
-  # Repeat the same process after every 10 seconds 
-  label_widget.after(10, open_camera)
-
-
-    
-
-
-
-
-# Create a button to open the camera in GUI app
-button1 = Button(app, text="Open Camera", command=open_camera) 
-button1.pack() 
-
-# Create an infinite loop for displaying app on screen 
-app.mainloop() 
-
-vid.release()
+  if cv2.waitKey(5) & 0xff == 27:
+    break

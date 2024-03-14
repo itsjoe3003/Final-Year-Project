@@ -5,13 +5,52 @@ body {
   font-family: Arial, sans-serif;
 }
 
-header {
+/* header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
   background-color: #f0f0f0;
+} */
+
+
+
+header {
+  background-color: #333; /* Dark background color */
+  color: #fff; /* White text color */
+  padding: 10px 20px; /* Padding for spacing */
+  display: flex; /* Flexbox layout */
+  justify-content: space-between; /* Items are evenly distributed */
+  align-items: center; /* Items are vertically centered */
 }
+
+.user-info {
+  display: flex; /* Flexbox layout */
+  align-items: center; /* Items are vertically centered */
+}
+
+.user-info span {
+  margin-right: 10px; /* Spacing between elements */
+}
+
+#dashboard-btn,
+#back-btn {
+  background-color: #007bff; /* Blue button color */
+  color: #fff; /* White text color */
+  border: none; /* No border */
+  padding: 10px 20px; /* Padding for spacing */
+  cursor: pointer; /* Cursor on hover */
+  text-decoration: none; /* No underline */
+}
+
+
+#dashboard-btn:hover,
+#back-btn:hover {
+  background-color: #0056b3; /* Darker blue color on hover */
+}
+
+
+
 
 #progress-bar {
   height: 20px;
@@ -121,17 +160,4 @@ header {
   font-size: 18px;
   color: #666;
 }
-
-
-#dashboard-btn{
-  width: 80px;
-  height: 50px;
-}
-
-
-#Map-btn {
-  width: 60px;
-  height: 50px;
-}
-
 

@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style type="text/css"> @import "style.css"; </style>
+<link rel="stylesheet" href="{{ url_for('static', filename='map_style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 <script type="application/x-javascript">
 
 'use strict';
@@ -34,19 +35,31 @@ new URLSearchParams(location.search).forEach((value, key) => {
 let is_dragging_year = false;
 
 </script>
-<script type="application/javascript" src="js/util.js" defer></script>
-<script type="application/javascript" src="js/era.js" defer></script>
-<script type="application/javascript" src="js/territory.js" defer></script>
-<script type="application/javascript" src="js/regions.js" defer></script>
-<script type="application/javascript" src="js/LangButton.js" defer></script>
-<script type="application/javascript" src="js/YearText.js" defer></script>
-<script type="application/javascript" src="js/YearBar.js" defer></script>
-<script type="application/javascript" src="js/Region.js" defer></script>
-<script type="application/javascript" src="js/Map.js" defer></script>
-<script type="application/javascript" src="js/twha.js" defer></script>
+<script type="application/javascript" src="{{ url_for('static', filename='js/util.js') }}" defer></script>
+<script type="application/javascript" src="{{ url_for('static', filename='js/era.js') }}" defer></script>
+<script type="application/javascript" src="{{ url_for('static', filename='js/territory.js') }}" defer></script>
+<script type="application/javascript" src="{{ url_for('static', filename='js/regions.js') }}" defer></script>
+<script type="application/javascript" src="{{ url_for('static', filename='js/LangButton.js') }}" defer></script>
+<script type="application/javascript" src="{{ url_for('static', filename='js/YearText.js') }}" defer></script>
+<script type="application/javascript" src="{{ url_for('static', filename='js/YearBar.js') }}" defer></script>
+<script type="application/javascript" src="{{ url_for('static', filename='js/Region.js') }}" defer></script>
+<script type="application/javascript" src="{{ url_for('static', filename='js/Map.js') }}" defer></script>
+<script type="application/javascript" src="{{ url_for('static', filename='js/twha.js') }}" defer></script>
 <title>Patched Historical Atras</title>
 </head>
 <body oncontextmenu="return false;">
+
+	<header>
+		<div class="user-info">
+				<span id="username">Welcome back, {{ username }}!</span>
+				<span id="experience">Total Experience: exp</span>
+		</div>
+		<input type="hidden" id="student-id" value="{{ session.get('student_id') }}">
+		<a href="{{ url_for('dashboard') }}"><button id="dashboard-btn">Dashboard</button></a>
+		<a href="{{ url_for('frontpage')}}"><button id="back-btn">Front Page</button></a>
+</header>
+
+
 <div id="head">
 <div id="control-box">
 <div id="tool-btn" class="head-btn"><span>≡</span></div>
@@ -60,7 +73,7 @@ let is_dragging_year = false;
 <div id="layer-tert"></div>
 <div id="layer-info"></div>
 <div id="year-bar" class="hidable">
-<img id="year-bar-cursor" src="img/year-pos.png" alt="" draggable="false"><canvas id="year-bar-scale" height="32"></canvas>
+<img id="year-bar-cursor" src="{{ url_for('static', filename='img/year-pos.png') }}" alt="" draggable="false"><canvas id="year-bar-scale" height="32"></canvas>
 </div>
 <div id="footer" class="hidable">
  <!-- always -->

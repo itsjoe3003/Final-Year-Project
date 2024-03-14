@@ -14,7 +14,7 @@
         </div>
         <input type="hidden" id="student-id" value="{{ session.get('student_id') }}">
         <a href="{{ url_for('dashboard') }}"><button id="dashboard-btn">Dashboard</button></a>
-        <a href="../../map/index.html"><button id="Map-btn">Map</button></a>
+        <a href="{{ url_for('map_page')}}"><button id="back-btn">Map</button></a>
     </header>
 
 
