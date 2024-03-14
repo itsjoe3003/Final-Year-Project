@@ -9,8 +9,7 @@ import requests
 
 warnings.filterwarnings('ignore')
 
-api = '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'
-# api = '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'
+api = ''
 
 headers = {
     "Content-Type": "application/json",
