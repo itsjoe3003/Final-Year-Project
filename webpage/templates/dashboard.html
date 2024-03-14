@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="{{ url_for('static', filename='course.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   <style>
     .row.content {height: 550px}
     
@@ -20,7 +22,7 @@
     }
   </style>
 </head>
-<body>
+<body onload="updateDashboardData(1)">
 
 <nav class="navbar navbar-inverse visible-xs">
   <div class="container-fluid">
@@ -51,7 +53,6 @@
         <li class="active"><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
         <li><a href="{{ url_for('frontpage') }}">Front Page</a></li>
         <li><a href="{{ url_for('logout') }}">Logout</a></li>
-        <!-- <li><a href="{{ url_for('logout') }}">Geo</a></li> -->
       </ul><br>
     </div>
     <br>
@@ -59,19 +60,22 @@
     <div class="col-sm-9">
       <div class="well">
         <h4>Dashboard</h4>
-        <p>Some text..</p>
+        <div id="progress-bar">
+          <div id="progress">0%</div>
+        </div>  
+        <!-- <p>Some text..</p> -->
       </div>
       <div class="row">
         <div class="col-sm-3">
           <div class="well">
             <h4>Users</h4>
-            <p>1 Million</p> 
+            <p>{{ session.get('username') }}</p> 
           </div>
         </div>
         <div class="col-sm-3">
           <div class="well">
-            <h4>Pages</h4>
-            <p>100 Million</p> 
+            <h4>Experience Points</h4>
+            <p id="experience">{{ exp_points }}</p> 
           </div>
         </div>
         <div class="col-sm-3">

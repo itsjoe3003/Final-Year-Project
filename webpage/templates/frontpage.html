@@ -6,7 +6,7 @@
     <title>User Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body onload="updateDashboardData()">
+<body onload="updateDashboardData(0)">
     <header>
         <div class="user-info">
             <span id="username">Welcome back, {{ username }}!</span>

@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 import pymysql
 import re
-from operator import itemgetter
 from sql_pwd import PASS
 import cv2
 import sys
@@ -10,9 +9,7 @@ import threading
 sys.path.insert(0, '/FYP')
 
 
-# from controller_test import Controller
-# from test2 import RandomForestClassifier
-from test2 import MainClass
+# from test2 import MainClass
 
 
 
@@ -584,7 +581,18 @@ def complete_assignment():
 @app.route('/dashboard')
 def dashboard():
     if 'loggedin' in session:
-        return render_template('dashboard.html', username=session.get("username"), email=session.get("password"))
+
+        student_id = session.get('student_id')
+
+        try:
+            with mysql.cursor() as cursor:
+                cursor.execute('select exp_points from leaderboard where student_id=%s', student_id)
+                exp_points = cursor.fetchone()
+
+        except pymysql.Error as e:
+            return jsonify({"error": "Database error connection"})
+
+        return render_template('dashboard.html', username=session.get("username"), exp_points=exp_points[0])
     else:
         return redirect(url_for('login'))
 
@@ -635,14 +643,14 @@ def map_page():
     
 
 
-def run_foo():
-    obj = MainClass()
-    while True:
-        obj.foo()
+# def run_foo():
+#     obj = MainClass()
+#     while True:
+#         obj.foo()
 
 
-foo_thread = threading.Thread(target=run_foo)
-foo_thread.start()
+# foo_thread = threading.Thread(target=run_foo)
+# foo_thread.start()
 
 
 

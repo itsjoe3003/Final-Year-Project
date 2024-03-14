@@ -14,32 +14,52 @@ document.querySelectorAll('.course').forEach(course => {
 
 
 
-function updateDashboardData() {
-    fetch('/dashboard-data')
-        .then(response => response.json())
-        .then(data => {
-            // Update leaderboard
-            let leaderboardList = document.getElementById('leaderboard-list');
-            leaderboardList.innerHTML = '';
-            data.leaderboard.forEach((entry, index) => {
-                let listItem = document.createElement('li');
-                listItem.textContent = `${entry.student_name}: ${entry.exp_points} points`;
-                leaderboardList.appendChild(listItem);
-            });
-  
-            // Update progress bar
-            let progressBar = document.getElementById('progress');
-            if (data.exp_points !== null) {
-                progressBar.style.width = `${data.progress_percentage}%`;
-                progressBar.textContent = `${data.progress_percentage}%`;
-                document.getElementById('experience').innerText = 'Total Experience: ' + `${data.exp_points}`;
-            } else {
-                console.error('Error fetching progress percentage:', data.error);
-            }
-        })
-        .catch(error => console.error('Error fetching dashboard data:', error));
+function updateDashboardData(dash) {
+        if(!dash){
+            fetch('/dashboard-data')
+            .then(response => response.json())
+            .then(data => {
+                // Update leaderboard
+                let leaderboardList = document.getElementById('leaderboard-list');
+                leaderboardList.innerHTML = '';
+                data.leaderboard.forEach((entry, index) => {
+                    let listItem = document.createElement('li');
+                    listItem.textContent = `${entry.student_name}: ${entry.exp_points} points`;
+                    leaderboardList.appendChild(listItem);
+                });
+      
+                // Update progress bar
+                let progressBar = document.getElementById('progress');
+                if (data.exp_points !== null) {
+                    progressBar.style.width = `${data.progress_percentage}%`;
+                    progressBar.textContent = `${data.progress_percentage}%`;
+                    document.getElementById('experience').innerText = 'Total Experience: ' + `${data.exp_points}`;
+                } else {
+                    console.error('Error fetching progress percentage:', data.error);
+                }
+            })
+            .catch(error => console.error('Error fetching dashboard data:', error));
+        } 
+        else {
+            fetch('/dashboard-data')
+            .then(response => response.json())
+            .then(data => {     
+                // Update progress bar
+                let progressBar = document.getElementById('progress');
+                if (data.exp_points !== null) {
+                    progressBar.style.width = `${data.progress_percentage}%`;
+                    progressBar.textContent = `${data.progress_percentage}%`;
+                    document.getElementById('experience').innerText = `${data.exp_points}`;
+                } else {
+                    console.error('Error fetching progress percentage:', data.error);
+                }
+            })
+            .catch(error => console.error('Error fetching dashboard data:', error));
+        }
   }
   
+
+
 
 
 
