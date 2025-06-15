@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment Website</title>
+  <!-- <link rel="stylesheet" href="styles.css"> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+  <header>
+    <input type="hidden" id="student-id" value="{{ session.get('student_id') }}">
+    <!-- <input type="hidden" id="topic-id" value="{{ topic_id }}"> -->
+
+      <a href="{{ url_for('frontpage') }}"><button id="dashboard-btn">Back to Front Page</button></a>
+  </header>
+
+
+  <div class="container">
+    <h1>Assignment: Topic Name</h1>
+    <form id="assignmentForm">
+      <div class="question">
+        <h3>Question 1: When did sangam literature originate?</h3>
+        <label><input type="radio" name="q1" value="A"> 100 BCE</label><br>
+        <label><input type="radio" name="q1" value="B"> 500 BCE</label><br>
+        <label><input type="radio" name="q1" value="C"> 300 BCE</label><br>
+        <label><input type="radio" name="q1" value="D"> 700 BCE</label>
+      </div>
+      <div class="question">
+        <h3>Question 2: Who spear headed tamil literary movement?</h3>
+        <label><input type="radio" name="q2" value="A"> Subramania Bharathi</label><br>
+        <label><input type="radio" name="q2" value="B"> Rabindranath Tagore</label><br>
+        <label><input type="radio" name="q2" value="C"> William Shakespeare</label><br>
+        <label><input type="radio" name="q2" value="D"> Valmiki</label>
+      </div>
+      <div class="question">
+        <h3>Question 3: Which dynasty witnessed a flourishing of literature during Tamils golden era
+            ?</h3>
+        <label><input type="radio" name="q3" value="A"> Gupta</label><br>
+        <label><input type="radio" name="q3" value="B"> Maurya</label><br>
+        <label><input type="radio" name="q3" value="C"> Chalukya</label><br>
+        <label><input type="radio" name="q3" value="D"> Chola</label>
+      </div>
+      <div class="question">
+        <h3>Question 4: What significant role did religion play in Tamil literature?
+        </h3>
+        <label><input type="radio" name="q4" value="A"> Minimal </label><br>
+        <label><input type="radio" name="q4" value="B"> Non-existent</label><br>
+        <label><input type="radio" name="q4" value="C"> Major</label><br>
+        <label><input type="radio" name="q4" value="D"> Insignificant</label>
+      </div>
+      <div class="question">
+        <h3>Question 5: Who were the revered deities in Sangam literature?
+        </h3>
+        <label><input type="radio" name="q5" value="A"> Ganesha and Kali</label><br>
+        <label><input type="radio" name="q5" value="B"> Mayon and Cēyōṉ</label><br>
+        <label><input type="radio" name="q5" value="C"> Vishnu and Shiva</label><br>
+        <label><input type="radio" name="q5" value="D"> Lakshmi and Saraswati</label>
+    </div>
+      <button type="submit" >Submit</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('assignmentForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      // Retrieve necessary data attributes from the assignment link
+      const assignmentNumber = document.querySelector('.assignment-link').dataset.assignmentNumber;
+      const assignmentName = document.querySelector('.assignment-link').dataset.assignmentName;
+      const topicId = document.querySelector('.assignment-link').dataset.topicId;
+
+      // Answers to the questions (should be compared to user selections)
+      const answers = {
+        q1: 'C',
+        q2: 'A',
+        q3: 'D',
+        q4: 'C',
+        q5: 'B',
+        
+
+      };
+
+      // Collect user selections
+      const userSelections = {
+        q1: document.querySelector('input[name="q1"]:checked').value,
+        q2: document.querySelector('input[name="q2"]:checked').value,
+        q3: document.querySelector('input[name="q3"]:checked').value,
+        q4: document.querySelector('input[name="q4"]:checked').value,
+        q5: document.querySelector('input[name="q5"]:checked').value,
+
+        // Add more user selections for other questions here
+      };
+
+      // Compare user selections with correct answers
+      let score = 0;
+      for (const question in answers) {
+        if (answers[question] === userSelections[question]) {
+          score++;
+        }
+      }
+
+
+      alert(`Your score is ${score}/${Object.keys(answers).length}`);
+
+      fetch('/complete-assignment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          student_id: studentId,
+          assignment_number: assignmentNumber,
+          assignment_name: assignmentName,
+          topic_id: topicId,
+          marks: score, // Add obtained marks data here if applicable
+        }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data); 
+
+        window.location.href = '/topic/' + topicId;
+      })
+      .catch(error => {
+        console.error('Error:', error); // Handle errors
+      });
+    });
+
+      // Redirect to the topic page (replace 'topic.html' with your actual topic page)
+    //  window.location.href = {{ url_for ('frontpage') }};
+    // window.location.href = this.querySelector('a').getAttribute('data-course-url');
+
+  </script>
+</body>
+</html>

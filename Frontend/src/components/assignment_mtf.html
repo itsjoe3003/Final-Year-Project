@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignment: Match the Following</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .column {
+      flex: 1;
+      padding: 20px;
+    }
+    .draggable {
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    .dropzone {
+      padding: 10px;
+      border: 2px dashed #000;
+      margin-bottom: 10px;
+      position: relative;
+    }
+    .matched {
+      background-color: #c8e6c9;
+    }
+    .arrow {
+      display: none;
+      position: absolute;
+      top: 50%;
+      right: -10px;
+      transform: translateY(-50%);
+      width: 0; 
+      height: 0; 
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid black;
+    }
+  </style>
+</head>
+<body>
+  <h1>Assignment: Match the Following</h1>
+  <div class="container">
+    <div class="column">
+      <h2>Questions</h2>
+      <div class="draggable" draggable="true" data-question="What is the primary focus of Sangam literature?">What is the primary focus of Sangam literature?</div>
+      <div class="draggable" draggable="true" data-question="Who spearheaded the modern Tamil literary movement in the late 19th century?">Who spearheaded the modern Tamil literary movement in the late 19th century?</div>
+      <div class="draggable" draggable="true" data-question="Which dynasty patronized literary classics during subsequent periods in Tamil literature?">Which dynasty patronized literary classics during subsequent periods in Tamil literature?</div>
+      <div class="draggable" draggable="true" data-question="What does Tolkappiyam address besides grammar?">What does Tolkappiyam address besides grammar?</div>
+      <div class="draggable" draggable="true" data-question="Which deities are prominently featured in Sangam literature?">Which deities are prominently featured in Sangam literature?</div>
+    </div>
+    <div class="column">
+      <h2>Answers</h2>
+      <div class="dropzone" data-answer="Love, war, social values, and religion">Love, war, social values, and religion</div>
+      <div class="dropzone" data-answer="Subramania Bharathi">Subramania Bharathi</div>
+      <div class="dropzone" data-answer="Chola and Pandya empires">Chola and Pandya empires</div>
+      <div class="dropzone" data-answer="Classification of habitats, animals, and human behavior">Classification of habitats, animals, and human behavior</div>
+      <div class="dropzone" data-answer="Mayon (Vishnu) and Cēyōṉ (Murugan)">Mayon (Vishnu) and Cēyōṉ (Murugan)</div>
+    </div>
+  </div>
+  <button id="submitBtn">Submit</button>
+
+  <script>
+    const draggables = document.querySelectorAll('.draggable');
+    const dropzones = document.querySelectorAll('.dropzone');
+    const submitBtn = document.getElementById('submitBtn');
+
+    draggables.forEach(draggable => {
+      draggable.addEventListener('dragstart', () => {
+        draggable.classList.add('dragging');
+      });
+
+      draggable.addEventListener('dragend', () => {
+        draggable.classList.remove('dragging');
+      });
+    });
+
+    dropzones.forEach(dropzone => {
+      dropzone.addEventListener('dragover', e => {
+        e.preventDefault();
+        const draggable = document.querySelector('.dragging');
+        dropzone.classList.add('highlight');
+      });
+
+      dropzone.addEventListener('dragleave', () => {
+        dropzone.classList.remove('highlight');
+      });
+
+      dropzone.addEventListener('drop', () => {
+        const draggable = document.querySelector('.dragging');
+        const answer = dropzone.dataset.answer;
+        const question = draggable.dataset.question;
+
+        if (question === answer) {
+          dropzone.textContent = draggable.textContent;
+          draggable.classList.add('matched');
+          const arrow = document.createElement('div');
+          arrow.classList.add('arrow');
+          dropzone.appendChild(arrow);
+        }
+
+        draggable.classList.remove('dragging');
+        draggable.remove();
+        dropzone.classList.remove('highlight');
+      });
+    });
+
+    submitBtn.addEventListener('click', () => {
+      let correctCount = 0;
+      dropzones.forEach(dropzone => {
+        if (dropzone.textContent === dropzone.dataset.answer) {
+          correctCount++;
+        }
+      });
+
+      if (correctCount === dropzones.length) {
+        alert('All questions matched correctly!');
+        // Additional evaluation logic can be added here
+      } else {
+        alert(`You matched ${correctCount} out of ${dropzones.length} questions correctly.`);
+      }
+    });
+  </script>
+</body>
+</html>

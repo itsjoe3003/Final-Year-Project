@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Era Selection</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #a4ecbe;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-gap: 20px;
+    padding: 20px;
+  }
+  
+  .grid-item {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .grid-item:hover {
+    background-color: #a4ecbe;
+  }
+</style>
+</head>
+<body>
+    <h1 style= "text-align: center; color: #000000;">Select an Era to Learn more about the Events that took place</h1> 
+<div class="container">
+  <div class="grid-item" onclick="openNewPage('200_BCE_200_CE')">200 BCE - 200 CE</div>
+  <div class="grid-item" onclick="openNewPage('130')">130</div>
+  <div class="grid-item" onclick="openNewPage('190')">190</div>
+  <div class="grid-item" onclick="openNewPage('210')">210</div>
+  <div class="grid-item" onclick="openNewPage('300-590')">300 - 590</div>
+  <div class="grid-item" onclick="openNewPage('560-580')">560 - 580</div>
+  <div class="grid-item" onclick="openNewPage('590-630')">590 - 630</div>
+  <div class="grid-item" onclick="openNewPage('628')">628</div>
+  <div class="grid-item" onclick="openNewPage('670-700')">670 - 700</div>
+  <div class="grid-item" onclick="openNewPage('800-830')">800 - 830</div>
+  <div class="grid-item" onclick="openNewPage('848')">848</div>
+  <div class="grid-item" onclick="openNewPage('903')">903</div>
+  <div class="grid-item" onclick="openNewPage('1023')">1023</div>
+  <div class="grid-item" onclick="openNewPage('1246')">1246</div>
+  <div class="grid-item" onclick="openNewPage('1279')">1279</div>
+  <div class="grid-item" onclick="openNewPage('1308')">1308</div>
+  <div class="grid-item" onclick="openNewPage('1522')">1522</div>
+  <div class="grid-item" onclick="openNewPage('1609')">1609</div>
+</div>
+
+<script>
+function openNewPage(year) {
+  window.location.href = year + '.html';
+}
+</script>
+</body>
+</html>

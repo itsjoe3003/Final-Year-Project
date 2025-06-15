@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic Page</title>
+    <style>
+        body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  padding: 20px 0;
+}
+
+h1 #topic-name {
+  /* background-color: #007bff; */
+  color: #fff;
+}
+
+.content {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.video {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.description {
+  flex: 1;
+}
+
+
+</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+      <input type="hidden" id="student-id" value="{{ session.get('student_id') }}">
+      <!-- <input type="hidden" id="topic-id" value="{{ topic_id }}"> -->
+        <h1 id="topic-name" value="{{ course.name }}">{{ course.name }}</h1>
+        <a href="{{ url_for('frontpage') }}"><button id="dashboard-btn">Back to Front Page</button></a>
+    </header>
+
+
+    <div class="content">
+        <div class="video">
+            <iframe id="video-iframe" width="1080" height="540" src="{{ course.video }}" frameborder="0" allowfullscreen></iframe>
+            <h2>Description</h2>
+            <p id="topic-description"> {{ course.description }} </p>
+        </div>
+        
+        <div class="assignments">
+            <h2>Assignments</h2>
+            <ul id="assignment-list">
+              <li><a href="{{ url_for('assignment_page', assignment_type='MCQ') }}" onclick="checkAndCompleteAssignment(1, 'MCQ', '{{ course.topic_id }}')" >Assignment 1: MCQ</a></li>
+              <li><a href="{{ url_for('assignment_page', assignment_type='Fill in the Blanks') }}" onclick="checkAndCompleteAssignment(2, 'Fill in the Blanks', '{{ course.topic_id }}')" >Assignment 2: Fill in the Blanks</a></li>
+              <li><a href="{{ url_for('assignment_page', assignment_type='Match the Following') }}" onclick="checkAndCompleteAssignment(3, 'Match the Following', '{{ course.topic_id }}')" >Assignment 3: Match the Following</a></li>
+            </ul>
+        </div>
+
+        
+    </div>
+    <div id="assignment-content"></div>
+
+    <script src="{{ url_for('static', filename='course.js') }}"> </script>
+</body>
+</html>

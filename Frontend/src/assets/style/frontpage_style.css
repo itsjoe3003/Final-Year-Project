@@ -1,0 +1,151 @@
+
+
+/* for courses*/
+body {
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  text-align: center;
+}
+
+
+header {
+  display: flex;
+  background-color: #333; 
+  color: #fff;
+  padding: 10px 20px; 
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;  
+}
+
+.user-info {
+  display: flex;
+  align-items: center; 
+}
+
+.user-info span {
+  margin-right: 10px; 
+}
+
+#dashboard-btn,
+#back-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px; 
+  cursor: pointer; 
+  text-decoration: none;  
+}
+
+
+#dashboard-btn:hover,
+#back-btn:hover {
+  background-color: #0056b3;  
+}
+
+
+
+
+#progress-bar {
+  height: 20px;
+  width: 98%;
+  border-radius: 10px;
+  background-color: lightgray;
+  margin: 5px;
+}
+
+#progress {
+  width: 0%;
+  height: 20px;
+  border-radius: 10px;
+  line-height: 20px;
+  background-color: #04AA6D;
+  text-align: center;
+  color: white;
+}
+
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.leaderboard,
+.courses {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.course {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.course h3 {
+  margin-top: 0;
+}
+
+.course p {
+  margin-bottom: 10px;
+}
+
+.course a {
+  display: block;
+  text-align: center;
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.course a:hover {
+  background-color: #0056b3;
+}
+
+.leaderboard {
+  max-width: 300px;
+  margin-top: 20px;
+  float: left;
+  width: 30%;
+  margin: 10px;
+  /* background-color: brown; */
+}
+
+.leaderboard h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+
+
+#leaderboard-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+#leaderboard-list li {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-radius: 10px;
+  text-align: center;
+}
+th, td {
+  background-color: #96D4D4;
+  width: 30%;
+}
+tr{
+  width: 90%;
+}

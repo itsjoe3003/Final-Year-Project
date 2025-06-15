@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Era Selection</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-gap: 20px;
+    padding: 20px;
+  }
+  
+  .grid-item {
+    background-color: #007bff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    color: whitesmoke;
+  }
+  
+  .grid-item:hover {
+    background-color: #0056b3;
+  }
+
+  button{
+    background-color: #007bff;
+    color: #fff;
+    border:black;
+    padding: 10px 20px; 
+    cursor: pointer; 
+    text-decoration: none;
+    border-radius: 10%;
+  }
+
+  button:hover {
+    background-color: #0056b3;  
+  }
+
+  header {
+    background-color: #007bff;
+    padding: 10px 0;
+    text-align: center;
+    color: #fff;
+  }
+
+  a{
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+    <header>
+        <h1>Select an Era to Learn more about the Events that took place</h1>
+        <button onclick="history.back()" style="background-color: #0056b3;">Go Back</button>
+    </header>
+    <div class="container">
+      <a href="/src/map/200_BCE_200_CE.html" class="grid-item">BCE - 200 CE</a>
+      <a href="/src/map/130.html" class="grid-item">130</a>
+      <a href="/src/map/190.html" class="grid-item">190</a>
+      <a href="/src/map/210.html" class="grid-item">210</a>
+      <a href="/src/map/300-590.html" class="grid-item">300 - 590</a>
+      <a href="/src/map/560-580.html" class="grid-item">560 - 580</a>
+      <a href="/src/map/590-630.html" class="grid-item">590 - 630</a>
+      <a href="/src/map/628.html" class="grid-item">628</a>
+      <a href="/src/map/670-700.html" class="grid-item">670 - 700</a>
+      <a href="/src/map/800-830.html" class="grid-item">800 - 830</a>
+      <a href="/src/map/848.html" class="grid-item">848</a>
+      <a href="/src/map/903.html" class="grid-item">903</a>
+      <a href="/src/map/1023.html" class="grid-item">1023</a>
+      <a href="/src/map/1246.html" class="grid-item">1246</a>
+      <a href="/src/map/1279.html" class="grid-item">1279</a>
+      <a href="/src/map/1308.html" class="grid-item">1308</a>
+      <a href="/src/map/1522.html" class="grid-item">1522</a>
+      <a href="/src/map/1609.html" class="grid-item">1609</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+.main-container {
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  height: 100vh; 
+  width: 100%;
+}
+
+
+.mic{
+  width: 100%;
+  align-self: right;
+  margin-left: 120%;
+}
+
+button {
+  margin-right: 5%;
+  /* height: px; */
+  width: 150px;
+}
+
+
+.back-btn{
+  display: flex;
+  justify-content: space-between;
+}

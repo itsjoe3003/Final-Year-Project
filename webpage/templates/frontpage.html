@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body onload="updateDashboardData(0)">
+    <header>
+        <div class="user-info">
+            <span id="username">Welcome back, {{ username }}!</span>
+            <span id="experience">Total Experience: exp</span>
+        </div>
+        <input type="hidden" id="student-id" value="{{ session.get('student_id') }}">
+        <a href="{{ url_for('dashboard') }}"><button id="dashboard-btn">Dashboard</button></a>
+        <a href="{{ url_for('map_page')}}"><button id="back-btn">Map</button></a>
+    </header>
+
+
+    <div id="progress-bar">
+        <div id="progress">0%</div>
+    </div>
+
+
+
+    <div class="container">
+        <div class="leaderboard">
+            <h2>Leaderboard</h2>
+            <ol id="leaderboard-list">
+                
+            </ol>
+        </div>
+        
+
+        <div class="courses">
+            <h2>Courses</h2>
+            <div class="course" data-course-name="Course 1">
+                <h3>LANGUAGE AND LITERATURE</h3>
+                <p>Language Families in India - Dravidian Languages – Tamil as a Classical Language - Classical
+                    Literature in Tamil – Secular Nature of Sangam Literature – Distributive Justice in Sangam
+                    Literature - Management Principles in Thirukural - Tamil Epics and Impact of Buddhism & Jainism
+                    in Tamil Land - Bakthi Literature Azhwars and Nayanmars - Forms of minor Poetry - Development
+                    of Modern literature in Tamil - Contribution of Bharathiyar and Bharathidhasan.</p>
+    
+                    <a href="{{ url_for('topic', course_name='Course 1') }}" data-course-url="{{ url_for('topic', course_name='Course 1') }}", onclick="loadContent('Course 1')">Learn More</a>
+            </div>
+            <div class="course" data-course-name="Course 2">
+                <h3>HERITAGE - ROCK ART PAINTINGS TO MODERN ART – SCULPTURE</h3>
+                <p>Hero stone to modern sculpture - Bronze icons - Tribes and their handicrafts - Art of temple car
+                    making - - Massive Terracotta sculptures, Village deities, Thiruvalluvar Statue at Kanyakumari,
+                    Making of musical instruments - Mridhangam, Parai, Veenai, Yazh and Nadhaswaram - Role of
+                    Temples in Social and Economic Life of Tamils.</p>
+                <a href="{{ url_for('topic', course_name='Course 2') }}" data-course-url="{{ url_for('topic', course_name='Course 2') }}">Learn More</a>
+            </div>
+            <div class="course" data-course-name="Course 3">
+                <h3>FOLK AND MARTIAL ARTS</h3>
+                <p>Therukoothu, Karagattam, Villu Pattu, Kaniyan Koothu, Oyillattam, Leather puppetry, Silambattam,
+                    Valari, Tiger dance - Sports and Games of Tamils.
+                    </p>
+                <a href="{{ url_for('topic', course_name='Course 3') }}" data-course-url="{{ url_for('topic', course_name='Course 3') }}">Learn More</a>
+            </div>
+            <div class="course" data-course-name="Course 4">
+                <h3>THINAI CONCEPT OF TAMILS </h3>
+                <p>Flora and Fauna of Tamils & Aham and Puram Concept from Tholkappiyam and Sangam
+                    Literature - Aram Concept of Tamils - Education and Literacy during Sangam Age - Ancient Cities
+                    and Ports of Sangam Age - Export and Import during Sangam Age - Overseas Conquest of
+                    Cholas.
+                    </p>
+                <a href="{{ url_for('topic', course_name='Course 4') }}" data-course-url="{{ url_for('topic', course_name='Course 4') }}">Learn More</a>
+            </div>
+            <div class="course" data-course-name="Course 5">
+                <h3>CONTRIBUTION OF TAMILS TO INDIAN NATIONAL MOVEMENT AND INDIAN CULTURE</h3>
+                <p>Contribution of Tamils to Indian Freedom Struggle - The Cultural Influence of Tamils over the
+                    other parts of India – Self-Respect Movement - Role of Siddha Medicine in Indigenous Systems
+                    of Medicine – Inscriptions & Manuscripts – Print History of Tamil Books. </p>
+                <a href="{{ url_for('topic', course_name='Course 5') }}" data-course-url="{{ url_for('topic', course_name='Course 5') }}">Learn More</a>
+            </div>
+            <div class="course" data-course-name="Course 6">
+                <h3>WEAVING AND CERAMIC TECHNOLOGY</h3>
+                <p>Weaving Industry during Sangam Age – Ceramic technology – Black and Red Ware Potteries
+                    (BRW) – Graffiti on Potteries. </p>
+                <a href="{{ url_for('topic', course_name='Course 6') }}" data-course-url="{{ url_for('topic', course_name='Course 6') }}">Learn More</a>
+            </div>
+            <div class="course" data-course-name="Course 7">
+                <h3>DESIGN AND CONSTRUCTION TECHNOLOGY </h3>
+                <p>Designing and Structural construction House & Designs in household materials during Sangam
+                    Age – Building materials and Hero stones of Sangam age – Details of Stage Constructions in
+                    Silappathikaram – Sculptures and Temples of Mamallapuram – Great Temples of Cholas and
+                    other worship places – Temples of Nayaka Period – Type study (Madurai Meenakshi Temple)-
+                    Thirumalai Nayakar Mahal – Chetti Nadu Houses, Indo – Saracenic architecture at Madras during
+                    British Period.
+                    </p>
+                <a href="{{ url_for('topic', course_name='Course 7') }}" data-course-url="{{ url_for('topic', course_name='Course 7') }}">Learn More</a>
+            </div>
+            <div class="course" data-course-name="Course 8">
+                <h3>MANUFACTURING TECHNOLOGY</h3>
+                <p>Art of Ship Building – Metallurgical studies – Iron industry – Iron smelting, steel –Copper and goldCoins as source of history – Minting of Coins – Beads making-industries Stone beads –Glass
+                    beads – Terracotta beads –Shell beads/ bone beats – Archeological evidences – Gem stone
+                    types described in Silappathikaram.</p>
+                <a href="{{ url_for('topic', course_name='Course 8') }}" data-course-url="{{ url_for('topic', course_name='Course 8') }}">Learn More</a>
+            </div>
+            <div class="course" data-course-name="Course 9">
+                <h3>AGRICULTURE AND IRRIGATION TECHNOLOGY</h3>
+                <p>Dam, Tank, ponds, Sluice, Significance of Kumizhi Thoompu of Chola Period, Animal Husbandry
+                    – Wells designed for cattle use – Agriculture and Agro Processing – Knowledge of Sea – Fisheries
+                    – Pearl – Conche diving – Ancient Knowledge of Ocean – Knowledge Specific Society.</p>
+                <a href="{{ url_for('topic', course_name='Course 9') }}" data-course-url="{{ url_for('topic', course_name='Course 9') }}">Learn More</a>
+            </div>
+            <div class="course" data-course-name="Course 10">
+                <h3>SCIENTIFIC TAMIL & TAMIL COMPUTING</h3>
+                <p>Development of Scientific Tamil – Tamil computing – Digitalization of Tamil Books – Development
+                    of Tamil Software – Tamil Virtual Academy – Tamil Digital Library – Online Tamil Dictionaries –
+                    Sorkuvai Project.
+                </p>
+                <a href="{{ url_for('topic', course_name='Course 10') }}" data-course-url="{{ url_for('topic', course_name='Course 10') }}">Learn More</a>
+            </div>
+            </div>
+    
+        </div>
+
+    </div>
+
+    <input type="hidden" id="student-id" value="{{ session.get('student_id') }}">
+    <script src="{{ url_for('static', filename='course.js') }}"></script>
+    <!-- <script src="{{ url_for('static', filename='script.js') }}"></script> -->
+        
+</body>
+</html>

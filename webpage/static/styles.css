@@ -1,0 +1,163 @@
+
+
+/* for courses*/
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f0f0f0;
+} */
+
+
+
+header {
+  background-color: #333; /* Dark background color */
+  color: #fff; /* White text color */
+  padding: 10px 20px; /* Padding for spacing */
+  display: flex; /* Flexbox layout */
+  justify-content: space-between; /* Items are evenly distributed */
+  align-items: center; /* Items are vertically centered */
+}
+
+.user-info {
+  display: flex; /* Flexbox layout */
+  align-items: center; /* Items are vertically centered */
+}
+
+.user-info span {
+  margin-right: 10px; /* Spacing between elements */
+}
+
+#dashboard-btn,
+#back-btn {
+  background-color: #007bff; /* Blue button color */
+  color: #fff; /* White text color */
+  border: none; /* No border */
+  padding: 10px 20px; /* Padding for spacing */
+  cursor: pointer; /* Cursor on hover */
+  text-decoration: none; /* No underline */
+}
+
+
+#dashboard-btn:hover,
+#back-btn:hover {
+  background-color: #0056b3; /* Darker blue color on hover */
+}
+
+
+
+
+#progress-bar {
+  height: 20px;
+  width: 98%;
+  border-radius: 10px;
+  background-color: lightgray;
+  margin: 5px;
+}
+
+#progress {
+  width: 0%;
+  height: 20px;
+  border-radius: 10px;
+  line-height: 20px;
+  background-color: #04AA6D;
+  text-align: center;
+  color: white;
+}
+
+.leaderboard {
+  float: left;
+  width: 30%;
+  margin: 10px;
+}
+/* Add styles for courses */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.leaderboard,
+.courses {
+  flex: 1;
+  margin-right: 20px; /* Adjust margin as needed */
+}
+
+.course {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.course h3 {
+  margin-top: 0;
+}
+
+.course p {
+  margin-bottom: 10px;
+}
+
+.course a {
+  display: block;
+  text-align: center;
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.course a:hover {
+  background-color: #0056b3;
+}
+
+/* Styles for leaderboard */
+.leaderboard {
+  max-width: 300px;
+  margin-top: 20px; /* Set a maximum width to prevent overflow */
+}
+
+.leaderboard h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+#leaderboard-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+#leaderboard-list li {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.leaderboard-rank {
+  flex: 0 0 30px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #666;
+}
+
+.leaderboard-user {
+  flex: 1;
+  font-size: 18px;
+  color: #333;
+}
+
+.leaderboard-exp {
+  flex: 0 0 80px;
+  text-align: right;
+  font-size: 18px;
+  color: #666;
+}
+
